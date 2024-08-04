@@ -13,6 +13,25 @@ def main():
     while True:
         print("Qual seu comando?")
 
+def battle():
+    #if enemyATKspeed > playerATKspeed
+        #inimigo começa atacando
+    #else
+        #player começa atacando
+
+    #dinamica batalha
+    # randint(1, playerATK) para dano player
+    # randint(1, enemyATK) para dano inimigo
+
+    
+    print(f"Batalha com {name}")
+
+    while True:
+        pass
+        
+        
+
+
 def enemy_status(inimigo):
 
     Aranha = []
@@ -42,20 +61,47 @@ def enemy_status(inimigo):
 
     if inimigo == 'Aranha':
         inimigo = Aranha
+
+        name = 'Aranha'
+
+        vidaEnemy = inimigo[0]['Vida']
+        ataqueEnemy = inimigo[0]['Ataque']
+        speedATKEnemy = inimigo[0]['speedATK']
+        defesaEnemy = inimigo[0]['defesa']
+
         return print ("Aranha \n", inimigo)
+    
     elif inimigo == 'Zumbi':
         inimigo = Zumbi
+
+        name = 'Zumbi'
+
+        vidaEnemy = inimigo[0]['Vida']
+        ataqueEnemy = inimigo[0]['Ataque']
+        speedATKEnemy = inimigo[0]['speedATK']
+        defesaEnemy = inimigo[0]['defesa']
+
         return print ("Zumbi \n", inimigo)
+    
     elif inimigo == 'Esqueleto':
         inimigo = Esqueleto
+
+        name = 'Esqueleto'
+
+        vidaEnemy = inimigo[0]['Vida']
+        ataqueEnemy = inimigo[0]['Ataque']
+        speedATKEnemy = inimigo[0]['speedATK']
+        defesaEnemy = inimigo[0]['defesa']
+
         return print ("Esqueleto \n", inimigo)
+    
 
 
 
 def cenario1():
     global PlayerLife, PlayerDef, PlayerAtk
 
-    lista_achar = ['inimigo']
+    lista_achar = ['bau', 'inimigo', 'dinheiro']
     lista_bau = ['espada', 'armadura', 'maça',]
     lista_inimigo = ['Aranha', 'Zumbi', 'Esqueleto']
     bau = choice(lista_bau)
