@@ -4,7 +4,7 @@ from time import sleep
 PlayerLife = 100
 PlayerDef = 10
 PlayerAtk = 5
-
+PlayerMoney = 0
 
 
 def main():
@@ -99,7 +99,7 @@ def enemy_status(inimigo):
 
 
 def cenario1():
-    global PlayerLife, PlayerDef, PlayerAtk
+    global PlayerLife, PlayerDef, PlayerAtk, PlayerMoney
 
     lista_achar = ['bau', 'inimigo', 'dinheiro']
     lista_bau = ['espada', 'armadura', 'maça',]
@@ -127,6 +127,12 @@ def cenario1():
     
     if achar == 'inimigo':
         enemy_status(inimigo)
+
+    if achar == 'dinheiro':
+        acharDinheiro = randint(1, 10)
+        print("Você encontra", acharDinheiro, "dólars.")
+        PlayerMoney += acharDinheiro
+        sleep(1)
 
 
 cenario1()
