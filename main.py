@@ -5,6 +5,7 @@ PlayerLife = 100
 PlayerDef = 10
 PlayerAtk = 5
 PlayerMoney = 0
+playerATKspeed = 8
 
 
 def main():
@@ -13,21 +14,46 @@ def main():
     while True:
         print("Qual seu comando?")
 
-def battle():
-    #if enemyATKspeed > playerATKspeed
-        #inimigo começa atacando
-    #else
-        #player começa atacando
+def battle(inimigo, statusEnemy):
+    global PlayerLife, PlayerDef, PlayerAtk, PlayerMoney, playerATKspeed
 
-    #dinamica batalha
-    # randint(1, playerATK) para dano player
-    # randint(1, enemyATK) para dano inimigo
-
+    enemyATKspeed = statusEnemy['speedATK']
+    enemyATK = statusEnemy['Ataque']
+    enemyLife = statusEnemy['Vida']
     
-    print(f"Batalha com {name}")
+
+    print(f"Inimigo: {inimigo}")
 
     while True:
-        pass
+        if enemyATKspeed > playerATKspeed:
+            print("Inimigo começa a atacar")
+            sleep(1)
+            ataqueEnemy = randint(1, enemyATK)
+            PlayerLife -= ataqueEnemy
+            print(f"Inimigo ataca com {ataqueEnemy} de dano")
+            sleep(1)
+            ataquePlayer = randint(1, PlayerAtk)
+            enemyLife -= ataquePlayer
+            print(f"Você ataca com {ataquePlayer} de dano")
+            sleep(1)
+        else:
+            print("Você começa a atacar")
+            sleep(1)
+            ataquePlayer = randint(1, PlayerAtk)
+            enemyLife -= ataquePlayer
+            print(f"Você ataca com {ataquePlayer} de dano")
+            sleep(1)
+
+        if enemyLife <= 0:
+            print("Inimigo morreu")
+            sleep(1)
+            break
+        elif PlayerLife <= 0:
+            print("Você morreu")
+            sleep(1)
+            break
+        else:
+            sleep(1)
         
         
 
@@ -64,37 +90,44 @@ def enemy_status(inimigo):
 
         name = 'Aranha'
 
-        vidaEnemy = inimigo[0]['Vida']
-        ataqueEnemy = inimigo[0]['Ataque']
-        speedATKEnemy = inimigo[0]['speedATK']
-        defesaEnemy = inimigo[0]['defesa']
+        enemyStatus = {
+            'Vida': inimigo[0]['Vida'],
+            'Ataque': inimigo[0]['Ataque'],
+            'speedATK': inimigo[0]['speedATK'],
+            'defesa': inimigo[0]['defesa']
+        }
 
-        return print ("Aranha \n", inimigo)
+      #  return print ("Aranha \n", inimigo)
     
     elif inimigo == 'Zumbi':
         inimigo = Zumbi
 
         name = 'Zumbi'
 
-        vidaEnemy = inimigo[0]['Vida']
-        ataqueEnemy = inimigo[0]['Ataque']
-        speedATKEnemy = inimigo[0]['speedATK']
-        defesaEnemy = inimigo[0]['defesa']
+        enemyStatus = {
+            'Vida': inimigo[0]['Vida'],
+            'Ataque': inimigo[0]['Ataque'],
+            'speedATK': inimigo[0]['speedATK'],
+            'defesa': inimigo[0]['defesa']
+        }
 
-        return print ("Zumbi \n", inimigo)
+      #  return print ("Zumbi \n", inimigo)
     
     elif inimigo == 'Esqueleto':
         inimigo = Esqueleto
 
         name = 'Esqueleto'
 
-        vidaEnemy = inimigo[0]['Vida']
-        ataqueEnemy = inimigo[0]['Ataque']
-        speedATKEnemy = inimigo[0]['speedATK']
-        defesaEnemy = inimigo[0]['defesa']
+        enemyStatus = {
+            'Vida': inimigo[0]['Vida'],
+            'Ataque': inimigo[0]['Ataque'],
+            'speedATK': inimigo[0]['speedATK'],
+            'defesa': inimigo[0]['defesa']
+        }
 
-        return print ("Esqueleto \n", inimigo)
+       # return print ("Esqueleto \n", inimigo)
     
+    battle(inimigo, enemyStatus)
 
 
 
