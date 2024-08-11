@@ -1,18 +1,80 @@
 import random
 from time import sleep
 
-PlayerLife = 1
+PlayerLife = 10
 PlayerDef = 10
 PlayerAtk = 5
-PlayerMoney = 0
-playerATKspeed = 1
+PlayerMoney = 5550
+playerATKspeed = 5
 
 
-def main():
-    print("Bem vindo ao jogo de aventura!")
-    print("Você tem", PlayerLife, "vidas!")
+def loja():
+    global PlayerLife, PlayerDef, PlayerAtk, PlayerMoney
+
+    print("Bem vindo à loja!")
+    print("1. Comprar espada de longo alcance (+5 de dano) - $10")
+    print("2. Comprar espada com lâmina de titanium(+15 de dano) - $35")
+    print("3. Comprar armadura de pele de urso (+10 de defesa) - $29")
+    print("4. Comprar manga do lago kor (+10 de vida maxima) - $50")
+    print("5. Comprar maça de ouro (recupere 5 vidas) - $20")
+    print("6. Sair")
+
     while True:
         print("Qual seu comando?")
+        comando = input()
+        if comando == '1':
+            if PlayerMoney >= 10:
+                print("Você comprou uma espada de longo alcance.")
+                PlayerAtk += 5
+                print("Agora você tem", PlayerAtk, "de ataque.")
+                PlayerMoney -= 10
+                break
+            else:
+                print("Você não tem dinheiro suficiente.")
+                break
+        elif comando == '2':
+            if PlayerMoney >= 35:
+                print("Você comprou uma espada com lâmina de titanium.")
+                PlayerAtk += 15
+                print("Agora você tem", PlayerAtk, "de ataque.")
+                PlayerMoney -= 35
+                break
+            else:
+                print("Você não tem dinheiro suficiente.")
+                break
+        elif comando == '3':
+            if PlayerMoney >= 29:
+                print("Você comprou uma armadura de pele de urso.")
+                PlayerDef += 10
+                print("Agora você tem", PlayerDef, "de defesa.")
+                PlayerMoney -= 29
+                break
+            else:
+                print("Você não tem dinheiro suficiente.")
+                break
+        elif comando == '4':
+            if PlayerMoney >= 50:
+                print("Você comprou uma manga do lago kor.")
+                PlayerLife += 10
+                print("Agora você tem", PlayerLife, "de vida.")
+                PlayerMoney -= 50
+                break
+            else:
+                print("Você não tem dinheiro suficiente.")
+                break
+        elif comando == '5':
+            if PlayerMoney >= 20:
+                print("Você comprou uma maça de ouro.")
+                PlayerLife += 5
+                print("Agora você tem", PlayerLife, "de vida.")
+                PlayerMoney -= 20
+                break
+            else:
+                print("Você não tem dinheiro suficiente.")
+                break
+        elif comando == '6':
+            print("Você saiu da loja.")
+            break
 
 def battle(name, inimigo, statusEnemy):
     global PlayerLife, PlayerDef, PlayerAtk, PlayerMoney, playerATKspeed
@@ -62,8 +124,6 @@ def battle(name, inimigo, statusEnemy):
         else:
             sleep(1)
         
-        
-
 
 def enemy_status(inimigo):
 
@@ -131,8 +191,6 @@ def enemy_status(inimigo):
     
     battle(name,inimigo, enemyStatus)
 
-
-
 def cenario1():
     global PlayerLife, PlayerDef, PlayerAtk, PlayerMoney
     runs = 0
@@ -191,7 +249,22 @@ def cenario1():
     print("Você tem", PlayerLife, "de vida!")
     print("Ataque: ", PlayerAtk)
     print("Defesa: ", PlayerDef)
-    print(f"$ {PlayerMoney}")
+    print(f"$ {PlayerMoney}\n")
 
+def cenario2():
+    pass
+
+def cenario3():
+    pass
+
+def FinalMatch():
+    pass
 
 cenario1()
+
+print("Deseja entrar na loja antes de iniciar sua nova aventura?")
+
+if input() == 'yes':
+    loja()
+else:
+    cenario2()
