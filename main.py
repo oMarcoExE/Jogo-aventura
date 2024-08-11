@@ -1,11 +1,11 @@
-from random import choice, randint
+import random
 from time import sleep
 
-PlayerLife = 100
+PlayerLife = 15
 PlayerDef = 10
 PlayerAtk = 5
 PlayerMoney = 0
-playerATKspeed = 8
+playerATKspeed = 1
 
 
 def main():
@@ -14,7 +14,7 @@ def main():
     while True:
         print("Qual seu comando?")
 
-def battle(inimigo, statusEnemy):
+def battle(name, inimigo, statusEnemy):
     global PlayerLife, PlayerDef, PlayerAtk, PlayerMoney, playerATKspeed
 
     enemyATKspeed = statusEnemy['speedATK']
@@ -22,26 +22,34 @@ def battle(inimigo, statusEnemy):
     enemyLife = statusEnemy['Vida']
     
 
-    print(f"Inimigo: {inimigo}")
+    print(f"Inimigo: {name}")
+    print(f"Vida: {enemyLife}, Ataque: {enemyATK}, Speed: {enemyATKspeed} \n")
 
     while True:
         if enemyATKspeed > playerATKspeed:
             print("Inimigo começa a atacar")
             sleep(1)
-            ataqueEnemy = randint(1, enemyATK)
+            ataqueEnemy = random.randint(1, enemyATK)
             PlayerLife -= ataqueEnemy
             print(f"Inimigo ataca com {ataqueEnemy} de dano")
             sleep(1)
-            ataquePlayer = randint(1, PlayerAtk)
+            print("Seu turno: ")
+            ataquePlayer = random.randint(1, PlayerAtk)
             enemyLife -= ataquePlayer
             print(f"Você ataca com {ataquePlayer} de dano")
             sleep(1)
         else:
             print("Você começa a atacar")
             sleep(1)
-            ataquePlayer = randint(1, PlayerAtk)
+            ataquePlayer = random.randint(1, PlayerAtk)
             enemyLife -= ataquePlayer
             print(f"Você ataca com {ataquePlayer} de dano")
+            sleep(1)
+            print("Turno inimigo: ")
+            sleep(1)
+            ataqueEnemy = random.randint(1, enemyATK)
+            PlayerLife -= ataqueEnemy
+            print(f"Inimigo ataca com {ataqueEnemy} de dano")
             sleep(1)
 
         if enemyLife <= 0:
@@ -96,8 +104,6 @@ def enemy_status(inimigo):
             'speedATK': inimigo[0]['speedATK'],
             'defesa': inimigo[0]['defesa']
         }
-
-      #  return print ("Aranha \n", inimigo)
     
     elif inimigo == 'Zumbi':
         inimigo = Zumbi
@@ -110,8 +116,6 @@ def enemy_status(inimigo):
             'speedATK': inimigo[0]['speedATK'],
             'defesa': inimigo[0]['defesa']
         }
-
-      #  return print ("Zumbi \n", inimigo)
     
     elif inimigo == 'Esqueleto':
         inimigo = Esqueleto
@@ -125,47 +129,58 @@ def enemy_status(inimigo):
             'defesa': inimigo[0]['defesa']
         }
 
-       # return print ("Esqueleto \n", inimigo)
     
-    battle(inimigo, enemyStatus)
+    battle(name,inimigo, enemyStatus)
 
 
 
 def cenario1():
     global PlayerLife, PlayerDef, PlayerAtk, PlayerMoney
+    runs = 0
 
     lista_achar = ['bau', 'inimigo', 'dinheiro']
     lista_bau = ['espada', 'armadura', 'maça',]
     lista_inimigo = ['Aranha', 'Zumbi', 'Esqueleto']
-    bau = choice(lista_bau)
-    achar = choice(lista_achar)
-    inimigo = choice(lista_inimigo)
+
+    pesos = [0.4, 0.5, 0.1]
+
     print("Você está em um labirinto de floresta.")
     sleep(1)
-    print("Voce verifica o mato e encontra um", achar, ".\n")
-    if achar == 'bau':
-        sleep(1)
-        if bau == 'espada':
-            print("Você encontra uma espada e aumento o ataque.")
-            PlayerAtk += randint(1, 6)
-            sleep(1)
-        elif bau == 'armadura':
-            print("Você encontra uma armadura e aumento o defesa.")
-            PlayerDef += randint(1, 6)
-            sleep(1)
-        elif bau == 'maça':
-            print("Você encontra uma maça. e recupera 10 vidas.")
-            PlayerLife += 10
-            sleep(1)
     
-    if achar == 'inimigo':
-        enemy_status(inimigo)
+    while runs < 3:
 
-    if achar == 'dinheiro':
-        acharDinheiro = randint(1, 10)
-        print("Você encontra", acharDinheiro, "dólars.")
-        PlayerMoney += acharDinheiro
-        sleep(1)
+        achar = random.choices(lista_achar, weights=pesos, k=1)[0]
+        bau = random.choice(lista_bau)
+        inimigo = random.choice(lista_inimigo)
 
+        print("Voce verifica o mato e encontra um", achar, ".\n")
+
+        if achar == 'bau':
+            sleep(1)
+            if bau == 'espada':
+                PlayerAtk += random.randint(1, 6)
+                print(f"Você encontra uma espada e aumento o ataque. Seu ataque atual é {PlayerAtk}\n")
+                sleep(1)
+            elif bau == 'armadura':
+                PlayerDef += random.randint(1, 6)
+                print(f"Você encontra uma armadura e aumento o defesa. Sua defesa atual é {PlayerDef}\n")
+                sleep(1)
+            elif bau == 'maça':
+                PlayerLife += 4
+                print(f"Você encontra uma maça. e recupera 4 vidas. Vida atual: {PlayerLife}\n")
+                sleep(1)
+
+            runs += 1
+        
+        if achar == 'inimigo':
+            enemy_status(inimigo)
+
+        if achar == 'dinheiro':
+            acharDinheiro = randint(1, 10)
+            print("Você encontra", acharDinheiro, "dólars. \n")
+            PlayerMoney += acharDinheiro
+            sleep(1)
+        
+        print("Você continua a explorar o labirinto. \n")
 
 cenario1()
