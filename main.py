@@ -1,7 +1,7 @@
 import random
 from time import sleep
 
-PlayerLife = 15
+PlayerLife = 1
 PlayerDef = 10
 PlayerAtk = 5
 PlayerMoney = 0
@@ -57,7 +57,6 @@ def battle(name, inimigo, statusEnemy):
             sleep(1)
             break
         elif PlayerLife <= 0:
-            print("Você morreu")
             sleep(1)
             break
         else:
@@ -163,7 +162,7 @@ def cenario1():
                 sleep(1)
             elif bau == 'armadura':
                 PlayerDef += random.randint(1, 6)
-                print(f"Você encontra uma armadura e aumento o defesa. Sua defesa atual é {PlayerDef}\n")
+                print(f"Você encontra uma armadura e aumenta a defesa. Sua defesa atual é {PlayerDef}\n")
                 sleep(1)
             elif bau == 'maça':
                 PlayerLife += 4
@@ -176,11 +175,23 @@ def cenario1():
             enemy_status(inimigo)
 
         if achar == 'dinheiro':
-            acharDinheiro = randint(1, 10)
+            acharDinheiro = random.randint(1, 10)
             print("Você encontra", acharDinheiro, "dólars. \n")
             PlayerMoney += acharDinheiro
             sleep(1)
         
-        print("Você continua a explorar o labirinto. \n")
+        if PlayerLife <= 0:
+            print("Você morreu")
+            break
+        else:
+            print("Você continua a explorar o labirinto. \n")
+
+
+    print("Você finalizou o primeiro campo de exploração.")
+    print("Você tem", PlayerLife, "de vida!")
+    print("Ataque: ", PlayerAtk)
+    print("Defesa: ", PlayerDef)
+    print(f"$ {PlayerMoney}")
+
 
 cenario1()
