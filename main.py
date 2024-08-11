@@ -376,7 +376,6 @@ def Chefe():
     print("Voce se sente confiante e parte para a luta...")
     sleep(1)
 
-
     cyclope = []
 
     cyclope.append({
@@ -386,8 +385,48 @@ def Chefe():
         'defesa': 15,
     })
 
+    cyclopeATKspeed = cyclope[0]['speedATK']
+    cyclopeATK = cyclope[0]['Ataque']
+    cyclopeLife = cyclope[0]['Vida']
+
+
     while True:
-        pass
+        if cyclopeATKspeed > playerATKspeed:
+            print("Cyclope começa o ataque")
+            sleep(1)
+            ataqueEnemy = random.randint(1, cyclopeATK)
+            PlayerLife -= ataqueEnemy
+            if PlayerLife <= 0:
+                print("voce morreu")
+                break
+            print(f"Cyclope ataca com {ataqueEnemy} de dano")
+            sleep(1)
+            print("Seu turno: ")
+            ataquePlayer = random.randint(1, PlayerAtk)
+            cyclopeLife -= ataquePlayer
+            if cyclopeLife <= 0:
+                print("\nCyclope morto!\n")
+                break
+            print(f"Voce ataca com {ataquePlayer} de dano")
+            sleep(1)
+        else:
+            print("Voce começa a atacar")
+            sleep(1)
+            ataquePlayer = random.randint(1, PlayerAtk)
+            cyclopeLife -= ataquePlayer
+            print(f"Voce ataca com {ataquePlayer} de dano")
+            if cyclopeLife <= 0:
+                print("\nCyclope morto!\n")
+                break
+            print("Turno inimigo: ")
+            sleep(1)
+            ataqueEnemy = random.randint(1, cyclopeATK)
+            PlayerLife -= ataqueEnemy
+            print(f"Cyclope ataca com {ataqueEnemy} de dano")
+            if PlayerLife <= 0:
+                print("voce morreu")
+                break
+
 
 def cenario3():
     pass
