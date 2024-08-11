@@ -75,6 +75,7 @@ def loja():
         elif comando == '6':
             print("Você saiu da loja.")
             break
+        else: print("Você não escolheu uma opção válida.")
 
 def battle(name, inimigo, statusEnemy):
     global PlayerLife, PlayerDef, PlayerAtk, PlayerMoney, playerATKspeed
@@ -125,7 +126,7 @@ def battle(name, inimigo, statusEnemy):
             sleep(1)
         
 
-def enemy_status(inimigo):
+def enemy_status1(inimigo):
 
     Aranha = []
     Zumbi = []
@@ -191,6 +192,93 @@ def enemy_status(inimigo):
     
     battle(name,inimigo, enemyStatus)
 
+def enemy_status2(inimigo):
+
+    Dracorcego  = []
+    urso = []
+    louco = []
+    fanático = []
+
+    Dracorcego.append({
+        'Vida': 25,
+        'Ataque': 7,
+        'speedATK': 9,
+        'defesa': 1,
+    })
+
+    urso.append({
+        'Vida': 20,
+        'Ataque': 10,
+        'speedATK': 2,
+        'defesa': 3,
+    })
+
+    louco.append({
+        'Vida': 10,
+        'Ataque': 4,
+        'speedATK': 15,
+        'defesa': -1,
+    })
+
+    fanático.append({
+        'Vida': 15,
+        'Ataque': 5,
+        'speedATK': 2,
+        'defesa': 4,
+    })
+
+    if inimigo == 'Dracorcego':
+        inimigo = Dracorcego
+
+        name = 'Dracorcego'
+
+        enemyStatus = {
+            'Vida': inimigo[0]['Vida'],
+            'Ataque': inimigo[0]['Ataque'],
+            'speedATK': inimigo[0]['speedATK'],
+            'defesa': inimigo[0]['defesa']
+        }
+    
+    elif inimigo == 'urso':
+        inimigo = urso
+
+        name = 'urso'
+
+        enemyStatus = {
+            'Vida': inimigo[0]['Vida'],
+            'Ataque': inimigo[0]['Ataque'],
+            'speedATK': inimigo[0]['speedATK'],
+            'defesa': inimigo[0]['defesa']
+        }
+    
+    elif inimigo == 'louco':
+        inimigo = louco
+
+        name = 'louco'
+
+        enemyStatus = {
+            'Vida': inimigo[0]['Vida'],
+            'Ataque': inimigo[0]['Ataque'],
+            'speedATK': inimigo[0]['speedATK'],
+            'defesa': inimigo[0]['defesa']
+        }
+    
+    elif inimigo == 'fanático':
+        inimigo = fanático
+
+        name = 'fanático'
+
+        enemyStatus = {
+            'Vida': inimigo[0]['Vida'],
+            'Ataque': inimigo[0]['Ataque'],
+            'speedATK': inimigo[0]['speedATK'],
+            'defesa': inimigo[0]['defesa']
+        }
+
+    
+    battle(name,inimigo, enemyStatus)
+
+
 def cenario1():
     global PlayerLife, PlayerDef, PlayerAtk, PlayerMoney
     runs = 0
@@ -204,7 +292,7 @@ def cenario1():
     print("Você está em um labirinto de floresta.")
     sleep(1)
     
-    while runs < 3:
+    while runs < 2:
 
         achar = random.choices(lista_achar, weights=pesos, k=1)[0]
         bau = random.choice(lista_bau)
@@ -230,7 +318,7 @@ def cenario1():
             runs += 1
         
         if achar == 'inimigo':
-            enemy_status(inimigo)
+            enemy_status1(inimigo)
 
         if achar == 'dinheiro':
             acharDinheiro = random.randint(1, 10)
@@ -252,7 +340,54 @@ def cenario1():
     print(f"$ {PlayerMoney}\n")
 
 def cenario2():
-    pass
+    global PlayerLife, PlayerDef, PlayerAtk, PlayerMoney
+
+    achar = random.choices(['bau', 'inimigo', 'dinheiro'], weights=[0.4, 0.5, 0.1], k=1)[0]
+    bau = random.choice(['espada', 'armadura', 'maça'])
+    lista_inimigo = random.choice(['Dracorcego', 'urso', 'louco', 'fanático'])
+
+    inimigo = random.choices(['Dracorcego', 'urso', 'louco', 'fanático'], weights=[0.2, 0.3, 0.5, 0.1], k=1)[0]
+
+
+    enemy_status2(inimigo)
+
+
+
+def Chefe():
+    global PlayerLife, PlayerDef, PlayerAtk, PlayerMoney
+
+    print("Voce descobre que encontrou o lar de um cyclope de 4 metros de altura")
+    print("e que estava preso por um chefe de uma cidade distante.")
+
+    print("Voce se esconde e se prepara para lutar")
+    print("Voce encotra uma manga banhada a diamante, come e ganha buffs")
+    
+    PlayerLife += 15
+    PlayerDef += 10
+    PlayerAtk += 8
+    
+    print("Ataque aumentado temporariamente")
+    sleep(1)
+    print("Defesa aumentada temporariamente")
+    sleep(1)
+    print("Vida aumentada temporariamente")
+    input()
+
+    print("Voce se sente confiante e parte para a luta...")
+    sleep(1)
+
+
+    cyclope = []
+
+    cyclope.append({
+        'Vida': 60,
+        'Ataque': 20,
+        'speedATK': 1,
+        'defesa': 15,
+    })
+
+    while True:
+        pass
 
 def cenario3():
     pass
@@ -263,8 +398,29 @@ def FinalMatch():
 cenario1()
 
 print("Deseja entrar na loja antes de iniciar sua nova aventura?")
+option = input()
+while True:
+    if option == 'yes':
+        loja()
+        break
+    elif option == 'no':
+        break
+    else: print("Você não escolheu uma opção válida.")
 
-if input() == 'yes':
-    loja()
-else:
+
+print("2 caminhos vistos a sua frente")
+sleep(1)
+print("oque deseja fazer? \n")
+print("1. ir a direita e entrar dentro de uma montanha")
+print("2. cair em um buraco escuro e misterioso")
+option = input()
+
+if option == '1':
     cenario2()
+elif option == '2':
+    Chefe()
+elif option == '3':
+    print("Você avista uma misteriosa cachoeira secreta, e decide entrar nela.")
+    cenario3()
+else:
+    print("Opção inválida")
